@@ -139,7 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Avg.cpp" />
+    <ClCompile Include="FillRandcpp.cpp" />
+    <ClCompile Include="FillRandoverload.cpp" />
+    <ClCompile Include="Max.cpp" />
+    <ClCompile Include="Min.cpp" />
+    <ClCompile Include="Print.cpp" />
+    <ClCompile Include="Sort.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Sum.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="declaration.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
