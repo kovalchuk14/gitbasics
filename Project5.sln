@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project5", "Project5\Projec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Recursion", "Recursion\Recursion.vcxproj", "{0B97F485-17CE-45E5-ADC3-1CBFA147B987}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "XO", "XO\XO.vcxproj", "{DA857D42-B643-441B-969F-E2199A977D82}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -31,6 +33,14 @@ Global
 		{0B97F485-17CE-45E5-ADC3-1CBFA147B987}.Release|x64.Build.0 = Release|x64
 		{0B97F485-17CE-45E5-ADC3-1CBFA147B987}.Release|x86.ActiveCfg = Release|Win32
 		{0B97F485-17CE-45E5-ADC3-1CBFA147B987}.Release|x86.Build.0 = Release|Win32
+		{DA857D42-B643-441B-969F-E2199A977D82}.Debug|x64.ActiveCfg = Debug|x64
+		{DA857D42-B643-441B-969F-E2199A977D82}.Debug|x64.Build.0 = Debug|x64
+		{DA857D42-B643-441B-969F-E2199A977D82}.Debug|x86.ActiveCfg = Debug|Win32
+		{DA857D42-B643-441B-969F-E2199A977D82}.Debug|x86.Build.0 = Debug|Win32
+		{DA857D42-B643-441B-969F-E2199A977D82}.Release|x64.ActiveCfg = Release|x64
+		{DA857D42-B643-441B-969F-E2199A977D82}.Release|x64.Build.0 = Release|x64
+		{DA857D42-B643-441B-969F-E2199A977D82}.Release|x86.ActiveCfg = Release|Win32
+		{DA857D42-B643-441B-969F-E2199A977D82}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
