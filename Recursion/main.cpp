@@ -31,12 +31,12 @@ void Fibanachi(int a)
 void Fibanachi2(int a)
 {
 
+	static int k=0;
 	static int d;
-	static int k;
 	static int b = 0;
 	static int c = 1;
 	d = b + c;
-	if (k == a) return;
+	if (k+2 == a) return;
 	if (d == 1)cout << 0 << "\t" << 1 << "\t";
 	k++;
 	cout << d << "\t";
