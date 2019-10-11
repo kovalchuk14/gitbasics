@@ -2,7 +2,8 @@
 using namespace std;
 //#define factorial
 //#define power
-#define fibanachi
+//#define fibanachi
+#define fibanachi2
 int Factorial(int n)
 {
 	if (n == 0)return 1; 
@@ -27,9 +28,31 @@ void Fibanachi(int a)
 	c = d;
 	Fibanachi(a);
 }
+void Fibanachi2(int a)
+{
+
+	static int d;
+	static int k;
+	static int b = 0;
+	static int c = 1;
+	d = b + c;
+	if (k == a) return;
+	if (d == 1)cout << 0 << "\t" << 1 << "\t";
+	k++;
+	cout << d << "\t";
+	b = c;
+	c = d;
+	Fibanachi2(a);
+}
 void main()
 {
+#ifdef fibanachi2
+	int a;
+	cout << "¬ведите количество чисел "; cin >> a;
+	Fibanachi2(a);
+#endif
 	setlocale(LC_ALL, "");
+
 #ifdef factorial
 	int n;
 	cout << "¬ведите число "; cin >> n;
