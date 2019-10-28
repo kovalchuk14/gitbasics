@@ -1,20 +1,39 @@
 #include <iostream>
 using namespace std;
 
-void Exchange(int* a, int* b);
+//#define Pointer
+#define Reference
 
+#ifdef Pointer
+template<typename T>
+void Exchange(T* a, T* b);
+#endif
+#ifdef Reference
+void Exchange(int& a, int& b);
+#endif
 
 void main()
 {
 	int a = 2;
 	int b = 3;
 	cout << a << "\t" << b << endl;
-	Exchange(&a, &b);
+	Exchange(a, b);
 	cout << a << "\t" << b << endl;
 }
-void Exchange(int* a, int* b)
+#ifdef Pointer
+template<typename T>
+void Exchange(T* a, T* b)
 {
-	int buffer = *a;
-	*a = *b;
-	*b = buffer;
+		*a ^= *b;
+		*b ^= *a;
+		*a ^= *b;
 }
+#endif
+#ifdef Reference
+void Exchange(int& a, int& b)
+{
+	int buffer = a;
+	a = b;
+	b = buffer;
+}
+#endif

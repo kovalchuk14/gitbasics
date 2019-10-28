@@ -10,7 +10,8 @@ using namespace std;
 	}
 	return sum;
 }*/
-int sum(int value ...)
+template<typename T>
+int sum(T value ...)
 { 
 	int sum = 0;
 	int* u = &value;		
