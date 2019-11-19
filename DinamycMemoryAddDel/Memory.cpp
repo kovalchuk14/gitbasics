@@ -1,4 +1,4 @@
-#include "Functions.h"
+#include "Function.h"
 template <typename T>T** allocate(const int rows, const int cols)
 {
 	T **brr = new T*[rows];

@@ -36,12 +36,12 @@ void main()
 	fill_rand(brr,rows, cols);
 	print(brr, rows, cols);
 	//cout << "¬ведите куда встаить или удалить "; cin >> index;
-	//brr = push_row_back(brr, rows, cols);
-	//brr = push_row_front(brr, rows, cols);
-	//brr = insert_row(brr, rows, cols,index);
-	//brr = pop_row_back(brr, rows, cols);
-	//brr = pop_row_front(brr, rows, cols);
-	//brr = erase_row(brr, rows, cols, index);
+	//push_row_back(brr, rows, cols);
+	//push_row_front(brr, rows, cols);
+	//insert_row(brr, rows, cols,index);
+	//pop_row_back(brr, rows, cols);
+	pop_row_front(brr, rows, cols);
+	//erase_row(brr, rows, cols, index);
 	//push_col_back(brr, rows, cols);
 	//push_col_front(brr, rows, cols);
 	//insert_col(brr, rows, cols,index);

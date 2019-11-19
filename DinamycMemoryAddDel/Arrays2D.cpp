@@ -1,6 +1,6 @@
 #include "Function.h"
 
-template <typename T>T** push_row_back(T** arr, int& rows, int& cols)
+template <typename T>void push_row_back(T**& arr, int& rows, int& cols)
 {
 	T** buffer = new T*[rows + 1]{};
 	for (int i = 0; i < rows; i++)	buffer[i] = arr[i];
@@ -9,9 +9,9 @@ template <typename T>T** push_row_back(T** arr, int& rows, int& cols)
 	arr = buffer;
 	arr[rows] = new int [cols] {};
 	rows++;
-	return arr;
+	
 }
-template <typename T>T** push_row_front(T** arr, int& rows, int& cols)
+template <typename T>void push_row_front(T **& arr, int& rows, int& cols)
 {
 	T** buffer = new T*[rows + 1]{};
 	for (int i = 0; i < rows; i++)	buffer[i + 1] = arr[i];
@@ -20,9 +20,9 @@ template <typename T>T** push_row_front(T** arr, int& rows, int& cols)
 	arr = buffer;
 	arr[0] = new T[cols]{};
 	rows++;
-	return arr;
+	
 }
-template <typename T>T** insert_row(T** arr, int& rows, int& cols, int index)
+template <typename T>void insert_row(T **& arr, int& rows, int& cols, int index)
 {
 	T** buffer = new T*[rows + 1]{};
 	for (int i = 0; i < index; i++)	buffer[i] = arr[i];
@@ -31,18 +31,16 @@ template <typename T>T** insert_row(T** arr, int& rows, int& cols, int index)
 	arr = buffer;
 	arr[index] = new T[cols]{};
 	rows++;
-	return arr;
 }
-template <typename T>T** pop_row_back(T** arr, int& rows, int& cols)
+template <typename T>void pop_row_back(T **& arr, int& rows, int& cols)
 {
 	T** buffer = new T*[--rows]{};
 	for (int i = 0; i < rows; i++)	buffer[i] = arr[i];
 
 	delete[] arr;
 	arr = buffer;
-	return arr;
 }
-template <typename T>T** pop_row_front(T** arr, int& rows, int& cols)
+template <typename T>void pop_row_front(T **& arr, int& rows, int& cols)
 {
 	T** buffer = new T*[rows - 1]{};
 	for (int i = 1; i <= rows; i++)	buffer[i - 1] = arr[i];
@@ -50,9 +48,8 @@ template <typename T>T** pop_row_front(T** arr, int& rows, int& cols)
 	delete[] arr;
 	arr = buffer;
 	rows--;
-	return arr;
 }
-template <typename T>T** erase_row(T** arr, int& rows, int& cols, int index)
+template <typename T>void erase_row(T **& arr, int& rows, int& cols, int index)
 {
 	T** buffer = new T*[rows - 1]{};
 	for (int i = 0; i < index; i++)	buffer[i] = arr[i];
@@ -60,7 +57,6 @@ template <typename T>T** erase_row(T** arr, int& rows, int& cols, int index)
 	delete[] arr;
 	arr = buffer;
 	rows--;
-	return arr;
 }
 template <typename T>void push_col_back(T** arr, int& rows, int& cols)
 {
