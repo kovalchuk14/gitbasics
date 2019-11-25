@@ -10,6 +10,9 @@ void Capitalize(char str[]);
 void Shrink(char str[]);
 void RemoveSpaces(char str[]);
 bool isPalindrome(char str[]);
+bool isPalindrome2(char str[]);
+bool isNumber(char str[]);
+int Calculator(int arr[], char crr[], int a);
 
 
 void main()
@@ -30,15 +33,49 @@ void main()
 	//Shrink(str);
 	//RemoveSpaces(str);
 	//cout << str << endl;
-	b = isPalindrome(str);
-	if (b == true)
+	//b = isPalindrome(str);
+	//b = isPalindrome2(str);
+	/*if (b == true)
 	{
 		cout << "This is palindrome" << endl;
 	}
 	else
 	{
 		cout << "This isn't palindrome" << endl;
+	}*/
+	/*b = isNumber(str);
+	if (b == true)
+	{
+		cout << "This is number" << endl;
 	}
+	else
+	{
+		cout << "This isn't number" << endl;
+	} */
+	int size = 256;
+	int *irr = new int[size];
+	char *crr = new char[size];
+	int w;
+	/*cin >> irr[0];
+	for (int i = 1; i < size; i++)
+	{
+		if (crr[i] == 13)
+		{
+			break;
+		}
+		else
+		{
+			a++;
+		}
+		cin >> crr[i] >> irr[i];
+	}*/
+	char* expression = new char[size] {};
+	cin >> expression;
+	int a=0;
+	for (int i = 0; crr[i]; i++)if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+')a++;
+	w = Calculator(irr, crr, a);
+	cout << w;
+
 
 }
 void input_line(char str[], const int n)
@@ -111,21 +148,97 @@ void RemoveSpaces(char str[])
 }
 bool isPalindrome(char str[])
 {
-	char *atr = new char[StrLen(str)+1]{};
+	char *atr = new char[StrLen(str) + 1]{};
 	for (int i = 0; str[i]; i++)atr[i] = str[i];
 	RemoveSpaces(atr);
 	LowerCase(atr);
 	int q = StrLen(atr);
-	for (int i = 0; i < (q + 1) / 2; i++)
+	for (int i = 0; i < q / 2; i++)
 	{
 		if (atr[i] != atr[q - i - 1])
 		{
-			//a++;
 			delete[] atr;
 			return false;
 		}
 	}
-
 	delete[] atr;
 	return true;
+}
+bool isPalindrome2(char str[])
+{
+	int n = StrLen(str);
+	for (int i = 0; i < n / 2; i++)
+	{
+		if (str[i] == ' ')i++, n++;
+		if (str[n - i - 1] == ' ')n--;
+		if (str[i] != str[n - i - 1])
+		{
+			if (str[i] + 32 != str[n - 1 - i] && str[i] != str[n - i - 1] + 32)return false;
+		}
+	}
+	return true;
+
+}
+bool isNumber(char str[])
+{
+	for (int i = 0; str[i]; i++)
+	{
+		if (!(str[i] >= '0'&&str[i] <= '9'))return false;
+	}
+	return true;
+}
+int Calculator(int arr[], char crr[], int a)
+{
+	for (int i = 0; i < a; i++)
+	{
+
+		if (crr[i] == '*')
+		{
+			arr[i] *= arr[i + 1];
+			for (int j = i+1; j < a; i++)
+			{
+				crr[j-1] = crr[j];
+				arr[j] = arr[j + 1];
+			}
+			a--;
+			i--;
+		}
+		if (crr[i] == '/')
+		{
+			arr[i] /= arr[i + 1];
+			for (int j = i + 1; j < a; i++)
+			{
+				crr[j - 1] = crr[j];
+				arr[j] = arr[j + 1];
+			}
+			a--;
+			i--;
+		}
+	}
+	for (int i = 0; i < a; i++)
+	{
+		if (crr[i] == '-')
+		{
+			arr[i] -= arr[i + 1];
+			for (int j = i + 1; j < a; i++)
+			{
+				crr[j - 1] = crr[j];
+				arr[j] = arr[j + 1];//ошибка
+			}
+			a--;
+			i--;
+		}		
+		if (crr[i] == '+')
+		{
+			arr[i] += arr[i + 1];
+			for (int j = i + 1; j < a; i++)
+			{
+				crr[j - 1] = crr[j];
+				arr[j] = arr[j + 1];//ошибка
+			}
+			a--;
+			i--;
+		}
+	}
+	return arr[0];
 }
