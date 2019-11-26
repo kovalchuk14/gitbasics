@@ -13,6 +13,7 @@ bool isPalindrome(char str[]);
 bool isPalindrome2(char str[]);
 bool isNumber(char str[]);
 int Calculator(int arr[], char crr[], int a);
+void CharToInt(char str[],int irr[]);
 
 
 void main()
@@ -20,13 +21,13 @@ void main()
 	setlocale(LC_ALL, "");
 	const int n = 200;
 	char str[n];
-	int z;
-	bool b;
-	cout << "¬ведите строку: ";
-	input_line(str, n);
-	cout << str << endl;
-	z = StrLen(str);
-	cout << z << endl;
+	//int z;
+	//bool b;
+	//cout << "¬ведите строку: ";
+	//input_line(str, n);
+	//cout << str << endl;
+	//z = StrLen(str);
+	//cout << z << endl;
 	//UpperCase(str);
 	//LowerCase(str);
 	//Capitalize(str);
@@ -53,8 +54,7 @@ void main()
 		cout << "This isn't number" << endl;
 	} */
 	int size = 256;
-	int *irr = new int[size];
-	char *crr = new char[size];
+	int *irr = new int[size] {};
 	int w;
 	/*cin >> irr[0];
 	for (int i = 1; i < size; i++)
@@ -69,10 +69,11 @@ void main()
 		}
 		cin >> crr[i] >> irr[i];
 	}*/
-	char* expression = new char[size] {};
-	cin >> expression;
+	char* crr = new char[size] {};
+	cin >> crr;
 	int a=0;
 	for (int i = 0; crr[i]; i++)if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+')a++;
+	CharToInt(crr, irr);
 	w = Calculator(irr, crr, a);
 	cout << w;
 
@@ -241,4 +242,20 @@ int Calculator(int arr[], char crr[], int a)
 		}
 	}
 	return arr[0];
+}
+void CharToInt(char str[],int irr[])
+{
+	//if (isNumber(str))
+	//{
+	int n = 0;
+		for (int i = 0; str[i]; i++)
+		{
+			if (str[i] != '+' && str[i] != '*' && str[i] != '/' && str[i] != '-' )
+			{
+				irr[n] *= 10;
+				irr[n] += str[i] - 48;
+			}
+			else n++;
+		}
+	//}
 }
