@@ -12,10 +12,8 @@ void RemoveSpaces(char str[]);
 bool isPalindrome(char str[]);
 bool isPalindrome2(char str[]);
 bool isNumber(char str[]);
-double Calculator(double  arr[], char crr[], int a);
+double Calculator(double arr[], char crr[], char qrr[], int a);
 void CharToInt(char str[],double irr[]);
-
-
 
 void main()
 {
@@ -71,20 +69,20 @@ void main()
 		}
 		cin >> crr[i] >> irr[i];
 	}*/
-	//char* crr = new char[size] {};
-	//cin >> crr;
-	//int a=0;
-	//for (int i = 0; crr[i]; i++)
-	//{
-	//	if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+')
-	//	{
-	//		qrr[a] = crr[i];
-	//		a++;
-	//	}
-	//}
-	//CharToInt(crr, irr);
-	//w = Calculator(irr, qrr, a);
-	//cout << w;
+	char* crr = new char[size] {};
+	cin >> crr;
+	int a=0;
+	for (int i = 0; crr[i]; i++)
+	{
+		if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+' || crr[i] == '^')
+		{
+			qrr[a] = crr[i];
+			a++;
+		}
+	}
+	CharToInt(crr, irr);
+	w = Calculator(irr, qrr,crr, a);
+	cout << w;
 
 
 }
@@ -197,8 +195,67 @@ bool isNumber(char str[])
 	}
 	return true;
 }
-double Calculator(double arr[], char crr[], int a)
+double Calculator(double arr[], char crr[], char qrr[], int a)
 {
+	for (int i = 0; i < a; i++)
+	{
+		if (crr[i] == ')')
+		{
+			for (int j = i; j >= 0; j--)
+			{
+			 
+				if (crr[j] == '(')
+				{
+					double *arr = new double[i - j - 1]{};//÷èñëà ÎÁĞÀÒÈ ÑŞÄÀ ÂÍÈÌÀÍÈÅ ËÎÕ Ó ÒÅÁß ÒÓÒ ÂÎÎÁÙÅ ÂÑÅ ÕÅĞÎÂÎ
+					char *wrr = new char[] {};//âåñü
+					char *err = new char[] {};//îïåğàöèè
+					int b = 0;
+					for (int z = 0; qrr[z]; z++)
+					{
+						if (qrr[z] == '*' || qrr[z] == '/' || qrr[z] == '-' || qrr[z] == '+' || qrr[z] == '^')
+						{
+							err[b] = qrr[z];
+							b++;
+						}
+					}
+					for (int z = 0; qrr[z]; z++)
+					{
+						wrr[z] = qrr[z];
+					}
+					for (int e = j+1; e < i; i++)
+					{
+						arr[e] = qrr[e];//
+
+					}
+					CharToInt(wrr, arr);
+					double w=Calculator(arr, err, qrr, b);
+
+					break;
+				}
+			}
+		}
+
+	}
+	for (int i = 0; i < a; i++)
+	{
+
+		if (crr[i] == '^')
+		{
+			int buffer = arr[i];
+			for (int j = 0; j < arr[i + 1]-1; j++)
+			{
+				arr[i] *= buffer;
+			}
+
+			for (int j = i + 1; j < a; j++)
+			{
+				crr[j - 1] = crr[j];
+				arr[j] = arr[j + 1];
+			}
+			a--;
+			i--;
+		}
+	}
 	for (int i = 0; i<a; i++)
 	{
 
@@ -252,17 +309,18 @@ double Calculator(double arr[], char crr[], int a)
 	}
 	return arr[0];
 }
-void CharToInt(char str[], double irr[])
+void CharToInt(char crr[], double irr[])
 {
 	//if (isNumber(str))
 	//{
+
 	int e = 0;
-		for (int i = 0; str[i]; i++)
-		{
-			if (str[i] != '+' && str[i] != '*' && str[i] != '/' && str[i] != '-' )
+		for (int i = 0; crr[i]; i++)
+		{ 
+			if (crr[i] != '+' && crr[i] != '*' && crr[i] != '/' && crr[i] != '-' && crr[i] != '^')
 			{
 				irr[e] *= 10;
-				irr[e] += str[i] - 48;
+				irr[e] += crr[i] - 48;
 			}
 			else e++;
 		}
