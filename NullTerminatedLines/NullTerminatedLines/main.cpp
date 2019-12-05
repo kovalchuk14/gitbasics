@@ -12,7 +12,7 @@ void RemoveSpaces(char str[]);
 bool isPalindrome(char str[]);
 bool isPalindrome2(char str[]);
 bool isNumber(char str[]);
-double Calculator(double arr[], char crr[], char qrr[], int a);
+double Calculator(double irr[], char crr[], int a);
 void CharToInt(char str[],double irr[]);
 
 void main()
@@ -74,14 +74,14 @@ void main()
 	int a=0;
 	for (int i = 0; crr[i]; i++)
 	{
-		if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+' || crr[i] == '^')
+		if (crr[i] == '*' || crr[i] == '/' || crr[i] == '-' || crr[i] == '+' || crr[i] == '^' || crr[i] == '(' || crr[i] == ')')
 		{
 			qrr[a] = crr[i];
 			a++;
 		}
 	}
 	CharToInt(crr, irr);
-	w = Calculator(irr, qrr,crr, a);
+	w = Calculator(irr, qrr, a);
 	cout << w;
 
 
@@ -195,8 +195,9 @@ bool isNumber(char str[])
 	}
 	return true;
 }
-double Calculator(double arr[], char crr[], char qrr[], int a)
+double Calculator(double irr[], char crr[], int a)
 {
+
 	for (int i = 0; i < a; i++)
 	{
 		if (crr[i] == ')')
@@ -206,33 +207,32 @@ double Calculator(double arr[], char crr[], char qrr[], int a)
 			 
 				if (crr[j] == '(')
 				{
-					double *arr = new double[i - j - 1]{};//÷èñëà ÎÁÐÀÒÈ ÑÞÄÀ ÂÍÈÌÀÍÈÅ ËÎÕ Ó ÒÅÁß ÒÓÒ ÂÎÎÁÙÅ ÂÑÅ ÕÅÐÎÂÎ
-					char *wrr = new char[] {};//âåñü
-					char *err = new char[] {};//îïåðàöèè
-					int b = 0;
-					for (int z = 0; qrr[z]; z++)
+					double *arr = new double[i - j]{};//÷èñëà
+					char *err = new char[i-j-1] {};//îïåðàöèè
+					for (int e = j,a=0; e < i; e++,a++)
 					{
-						if (qrr[z] == '*' || qrr[z] == '/' || qrr[z] == '-' || qrr[z] == '+' || qrr[z] == '^')
-						{
-							err[b] = qrr[z];
-							b++;
-						}
+						
+						arr[a] = irr[e];
 					}
-					for (int z = 0; qrr[z]; z++)
+					for (int e = j+1,a=0; e < i; e++,a++)
 					{
-						wrr[z] = qrr[z];
+						err[a] = crr[e];
 					}
-					for (int e = j+1; e < i; i++)
+					double w=Calculator(arr, err, i - j - 1);
+					irr[j] = w;
+					for (int e = j; crr[e]; e++)
 					{
-						arr[e] = qrr[e];//
-
+						crr[e] = crr[i+1];
 					}
-					CharToInt(wrr, arr);
-					double w=Calculator(arr, err, qrr, b);
-
+					for (int e = i; irr[e]; e++)
+					{
+						irr[e] = irr[i - j - 1];
+					}
 					break;
 				}
 			}
+			
+			
 		}
 
 	}
@@ -241,16 +241,16 @@ double Calculator(double arr[], char crr[], char qrr[], int a)
 
 		if (crr[i] == '^')
 		{
-			int buffer = arr[i];
-			for (int j = 0; j < arr[i + 1]-1; j++)
+			int buffer = irr[i];
+			for (int j = 0; j < irr[i + 1]-1; j++)
 			{
-				arr[i] *= buffer;
+				irr[i] *= buffer;
 			}
 
 			for (int j = i + 1; j < a; j++)
 			{
 				crr[j - 1] = crr[j];
-				arr[j] = arr[j + 1];
+				irr[j] = irr[j + 1];
 			}
 			a--;
 			i--;
@@ -261,22 +261,22 @@ double Calculator(double arr[], char crr[], char qrr[], int a)
 
 		if (crr[i] == '*')
 		{
-			arr[i] *= arr[i + 1];
+			irr[i] *= irr[i + 1];
 			for (int j = i+1; j < a; j++)
 			{
 				crr[j-1] = crr[j];
-				arr[j] = arr[j + 1];
+				irr[j] = irr[j + 1];
 			}
 			a--;
 			i--;
 		}
 		if (crr[i] == '/')
 		{
-			arr[i] /= arr[i + 1];
+			irr[i] /=irr[i + 1];
 			for (int j = i + 1; j < a; j++)
 			{
 				crr[j - 1] = crr[j];
-				arr[j] = arr[j + 1];
+				irr[j] = irr[j + 1];
 			}
 			a--;
 			i--;
@@ -286,28 +286,28 @@ double Calculator(double arr[], char crr[], char qrr[], int a)
 	{
 		if (crr[i] == '-')
 		{
-			arr[i] -= arr[i + 1];
+			irr[i] -= irr[i + 1];
 			for (int j = i + 1; j < a; j++)
 			{
 				crr[j - 1] = crr[j];
-				arr[j] = arr[j + 1];
+				irr[j] = irr[j + 1];
 			}
 			a--;
 			i--;
 		}		
 		if (crr[i] == '+')
 		{
-			arr[i] += arr[i + 1];
+			irr[i] += irr[i + 1];
 			for (int j = i + 1; j < a; j++)
 			{
 				crr[j - 1] = crr[j];
-				arr[j] = arr[j + 1];
+				irr[j] = irr[j + 1];
 			}
 			a--;
 			i--;
 		}
 	}
-	return arr[0];
+	return irr[0];
 }
 void CharToInt(char crr[], double irr[])
 {
@@ -315,10 +315,15 @@ void CharToInt(char crr[], double irr[])
 	//{
 
 	int e = 0;
+	
 		for (int i = 0; crr[i]; i++)
 		{ 
 			if (crr[i] != '+' && crr[i] != '*' && crr[i] != '/' && crr[i] != '-' && crr[i] != '^')
 			{
+				if (crr[i] == '(' || crr[i] == ')')
+				{
+					continue;
+				}
 				irr[e] *= 10;
 				irr[e] += crr[i] - 48;
 			}
