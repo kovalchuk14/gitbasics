@@ -70,6 +70,7 @@ void main()
 		cin >> crr[i] >> irr[i];
 	}*/
 	char* crr = new char[size] {};
+	cout << "¬ведите уравнение: ";
 	cin >> crr;
 	int a=0;
 	for (int i = 0; crr[i]; i++)
@@ -82,9 +83,9 @@ void main()
 	}
 	CharToInt(crr, irr);
 	w = Calculator(irr, qrr, a);
-	cout << w;
+	cout << w<<endl;
 
-
+	main();
 }
 void input_line(char str[], const int n)
 {
@@ -197,7 +198,6 @@ bool isNumber(char str[])
 }
 double Calculator(double irr[], char crr[], int a)
 {
-
 	for (int i = 0; i < a; i++)
 	{
 		if (crr[i] == ')')
@@ -220,18 +220,20 @@ double Calculator(double irr[], char crr[], int a)
 					}
 					double w=Calculator(arr, err, i - j - 1);
 					irr[j] = w;
-					for (int e = j; crr[e]; e++)
+
+
+					for (int e = j,q=i+1; q<a; e++,q++)
 					{
-						crr[e] = crr[i+1];
+						crr[e] = crr[q];
+						crr[q] = 0;
 					}
-					for (int e = i; irr[e]; e++)
+					for (int e = j+1,q=i; q<a; e++,q++)
 					{
-						irr[e] = irr[i - j - 1];
+						irr[e] = irr[q];
 					}
 					break;
 				}
 			}
-			
 			
 		}
 
@@ -252,8 +254,6 @@ double Calculator(double irr[], char crr[], int a)
 				crr[j - 1] = crr[j];
 				irr[j] = irr[j + 1];
 			}
-			a--;
-			i--;
 		}
 	}
 	for (int i = 0; i<a; i++)
@@ -267,8 +267,6 @@ double Calculator(double irr[], char crr[], int a)
 				crr[j-1] = crr[j];
 				irr[j] = irr[j + 1];
 			}
-			a--;
-			i--;
 		}
 		if (crr[i] == '/')
 		{
@@ -278,8 +276,6 @@ double Calculator(double irr[], char crr[], int a)
 				crr[j - 1] = crr[j];
 				irr[j] = irr[j + 1];
 			}
-			a--;
-			i--;
 		}
 	}
 	for (int i = 0; i < a; i++)
@@ -292,8 +288,6 @@ double Calculator(double irr[], char crr[], int a)
 				crr[j - 1] = crr[j];
 				irr[j] = irr[j + 1];
 			}
-			a--;
-			i--;
 		}		
 		if (crr[i] == '+')
 		{
@@ -303,8 +297,6 @@ double Calculator(double irr[], char crr[], int a)
 				crr[j - 1] = crr[j];
 				irr[j] = irr[j + 1];
 			}
-			a--;
-			i--;
 		}
 	}
 	return irr[0];
